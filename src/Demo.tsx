@@ -15,10 +15,10 @@ function MersenneTwister(seed) {
 }
 `;
 
-const CodeWithCopyButton = withCopyButton(() => <pre><code>{str}</code></pre>);
+const CodeWithCopyButton = withCopyButton(({ children }) => <pre><code>{children}</code></pre>);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <CodeWithCopyButton></CodeWithCopyButton>
+    <CodeWithCopyButton>{str}</CodeWithCopyButton>
   </React.StrictMode>,
 );
