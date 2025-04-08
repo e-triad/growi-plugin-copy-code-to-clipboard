@@ -1,8 +1,15 @@
 import innerText from 'react-innertext';
+import React from 'react';
+import { growiReact } from '@growi/pluginkit';
 
 import './CodeWithCopyButton.css';
 
+const growiReactInstance = growiReact(React);
+const { useState } = growiReactInstance;
+
 const CopyButton = ({ text }: { text: string }): JSX.Element => {
+  const [copied, setCopied] = useState(false);
+
   const clickHandler = async() => {
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(text);
@@ -14,17 +21,21 @@ const CopyButton = ({ text }: { text: string }): JSX.Element => {
       document.execCommand('copy');
       document.body.removeChild(textArea);
     }
-    console.log('copied');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <button
-      className="btn btn-sm btn-copy btn-outline-secondary border-0 text-muted"
-      data-toggle="tooltip" data-placement="top" title="Copy to clipboard"
-      onClick={clickHandler}
-    >
-      copy
-    </button>
+    <div className="copy-button-wrapper">
+      {copied && <span className="copy-feedback">Copied!</span>}
+      <button
+        className="btn btn-sm btn-outline-secondary border-0 text-muted"
+        data-toggle="tooltip" data-placement="top" title="Copy to clipboard"
+        onClick={clickHandler}
+      >
+        copy
+      </button>
+    </div>
   );
 };
 
@@ -35,12 +46,12 @@ export const withCopyButton = (Code: React.FunctionComponent<any>): React.Functi
     }
 
     return (
-      <>
-        <div className='btn-copy-container'>
+      <div className="code-block-wrapper">
+        <div className='copy-button-position'>
           <CopyButton text={innerText(children)} />
         </div>
         <Code {...props}>{children}</Code>
-      </>
+      </div>
     );
   };
 };
