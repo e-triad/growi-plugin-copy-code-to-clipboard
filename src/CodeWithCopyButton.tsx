@@ -14,6 +14,7 @@ const CopyButton = ({ text }: { text: string }): JSX.Element => {
       document.execCommand('copy');
       document.body.removeChild(textArea);
     }
+    console.log('copied');
   };
 
   return (
