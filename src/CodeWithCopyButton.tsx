@@ -4,10 +4,9 @@ import { growiReact } from '@growi/pluginkit';
 
 import './CodeWithCopyButton.css';
 
-const growiReactInstance = growiReact(React);
-const { useState } = growiReactInstance;
-
 const CopyButton = ({ text }: { text: string }): JSX.Element => {
+  const growiReactInstance = growiReact(React);
+  const { useState } = growiReactInstance;
   const [copied, setCopied] = useState(false);
 
   const clickHandler = async() => {
