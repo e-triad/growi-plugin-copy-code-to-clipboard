@@ -1,14 +1,14 @@
 {
   "client-entry.tsx": {
-    "file": "assets/client-entry.36c2f182.js",
+    "file": "assets/client-entry.278444b9.js",
     "src": "client-entry.tsx",
     "isEntry": true,
     "css": [
-      "assets/client-entry.ce29db86.css"
+      "assets/client-entry.d2dbeeef.css"
     ]
   },
   "client-entry.css": {
-    "file": "assets/client-entry.ce29db86.css",
+    "file": "assets/client-entry.d2dbeeef.css",
     "src": "client-entry.css"
   }
 }

@@ -1,0 +1,1 @@
+.code-block-wrapper{position:relative}.copy-button-position{position:absolute;top:1rem;right:.5rem;z-index:10}.copy-button-wrapper{display:flex;align-items:center;gap:8px}.copy-feedback{color:#28a745;font-size:.875rem;animation:fadeIn .2s ease-in;white-space:nowrap}@keyframes fadeIn{0%{opacity:0}to{opacity:1}}
