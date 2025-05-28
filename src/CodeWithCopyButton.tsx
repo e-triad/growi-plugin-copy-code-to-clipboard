@@ -45,12 +45,12 @@ export const withCopyButton = (Code: React.FunctionComponent<any>): React.Functi
     }
 
     return (
-      <div className="code-block-wrapper">
-        <div className='copy-button-position'>
+      <>
+        <div className="copy-button-position">
           <CopyButton text={innerText(children)} />
         </div>
         <Code {...props}>{children}</Code>
-      </div>
+      </>
     );
   };
 };
