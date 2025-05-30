@@ -1,8 +1,20 @@
+.code-block-container {
+  position: relative;
+}
+
 .copy-button-position {
   position: absolute;
   top: 1rem;
   right: .5rem;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* コードブロックコンテナにホバーしたときにボタンを表示 */
+.code-block-container:hover .copy-button-position,
+pre:hover .copy-button-position {
+  opacity: 1;
 }
 
 .copy-button-wrapper {
@@ -14,15 +26,21 @@
 .copy-feedback {
   color: #28a745;
   font-size: 0.875rem;
-  animation: fadeIn 0.2s ease-in;
+  animation: fadeInOut 2s ease-in-out forwards;
   white-space: nowrap;
 }
 
-@keyframes fadeIn {
-  from {
+@keyframes fadeInOut {
+  0% {
     opacity: 0;
   }
-  to {
+  10% {
     opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
