@@ -4,10 +4,14 @@ import { growiReact } from '@growi/pluginkit';
 
 import './CodeWithCopyButton.css';
 
-const CopyButton = ({ text }: { text: string }): JSX.Element => {
+const CopyButton = ({ text, onCopyStatusChange }: { text: string; onCopyStatusChange: (copied: boolean) => void }): JSX.Element => {
   const growiReactInstance = growiReact(React);
-  const { useState } = growiReactInstance;
+  const { useState, useEffect } = growiReactInstance;
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    onCopyStatusChange(copied);
+  }, [copied, onCopyStatusChange]);
 
   const clickHandler = async() => {
     if (navigator.clipboard) {
@@ -21,7 +25,7 @@ const CopyButton = ({ text }: { text: string }): JSX.Element => {
       document.body.removeChild(textArea);
     }
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 1000);
   };
 
   return (
@@ -43,14 +47,22 @@ const CopyButton = ({ text }: { text: string }): JSX.Element => {
 
 export const withCopyButton = (Code: React.FunctionComponent<any>): React.FunctionComponent<any> => {
   return ({ children, inline, ...props }) => {
+    const growiReactInstance = growiReact(React);
+    const { useState, useCallback } = growiReactInstance;
+    const [isShowingCopyMessage, setIsShowingCopyMessage] = useState(false);
+
+    const handleCopyStatusChange = useCallback((copied: boolean) => {
+      setIsShowingCopyMessage(copied);
+    }, []);
+
     if (inline) {
       return <Code {...props} inline>{children}</Code>;
     }
 
     return (
       <div className="code-block-container">
-        <div className="copy-button-position">
-          <CopyButton text={innerText(children)} />
+        <div className={`copy-button-position ${isShowingCopyMessage ? 'show-on-copy' : ''}`}>
+          <CopyButton text={innerText(children)} onCopyStatusChange={handleCopyStatusChange} />
         </div>
         <Code {...props}>{children}</Code>
       </div>

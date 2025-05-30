@@ -4,12 +4,16 @@
   right: .5rem;
   z-index: 10;
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
 }
 
 /* コードブロックコンテナにホバーしたときにボタンを表示 */
 .code-block-container:hover .copy-button-position,
 pre:hover .copy-button-position {
+  opacity: 1;
+}
+
+/* コピー状態の時は常に表示 */
+.copy-button-position.show-on-copy {
   opacity: 1;
 }
 
@@ -22,21 +26,5 @@ pre:hover .copy-button-position {
 .copy-feedback {
   color: #28a745;
   font-size: 0.875rem;
-  animation: fadeInOut 2s ease-in-out forwards;
   white-space: nowrap;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
